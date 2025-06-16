@@ -8,7 +8,7 @@ SSH Security Lab: Fail2Ban + Port Knocking + Docker
 
 Состав проекта:
 
-ssh-lab/
+docker-ssh/
 ├── docker-compose.yml
 ├── Dockerfile-server # Образ для secure-ssh
 ├── Dockerfile-attacker # Образ для attacker
