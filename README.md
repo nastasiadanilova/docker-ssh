@@ -22,7 +22,7 @@ ssh-lab/
 2. Клонируй репозиторий:
 
 ```bash
-git clone https://github.com/yourusername/ssh-lab.git
-cd ssh-lab
+git clone https://github.com/nastasiadanilova/docker-ssh
+cd docker-ssh
 docker compose build
 docker compose up --abort-on-container-exit
