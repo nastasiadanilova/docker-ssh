@@ -1,0 +1,22 @@
+services:
+  secure-ssh:
+    build:
+      context: .
+      dockerfile: Dockerfile-server
+    container_name: secure-ssh
+    ports:
+      - "2222:22"
+      - "17000:7000"
+      - "18000:8000"
+      - "19000:9000"
+    cap_add:
+      - NET_ADMIN
+    privileged: true
+
+  attacker:
+    build:
+      context: .
+      dockerfile: Dockerfile-attacker
+    depends_on:
+      - secure-ssh
+    command: ["sh", "-c", "./attack.sh"]

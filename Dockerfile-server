@@ -1,0 +1,25 @@
+FROM ubuntu:20.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y --fix-missing \
+    openssh-server \
+    knockd \
+    iptables \
+    fail2ban \
+    rsyslog \
+    net-tools \
+    && mkdir /var/run/sshd \
+    && useradd -m -s /bin/bash student \
+    && echo 'student:studentpass' | chpasswd
+
+COPY sshd_config /etc/ssh/sshd_config
+COPY knockd.conf /etc/knockd.conf
+COPY jail.local /etc/fail2ban/jail.local
+COPY entrypoint.sh /entrypoint.sh
+
+RUN chmod +x /entrypoint.sh
+RUN touch /var/log/auth.log && chmod 666 /var/log/auth.log
+
+EXPOSE 22 7000 8000 9000
+CMD ["/entrypoint.sh"]
